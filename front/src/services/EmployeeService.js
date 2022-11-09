@@ -4,7 +4,7 @@ const EMPLOYEES_REST_API_URL = 'https://localhost:8080/api/employess';
 
 class EmployeeService {
 
-    getEmployess() {
+    getAllEmployess() {
         return axios.get(EMPLOYEES_REST_API_URL);
     }
 

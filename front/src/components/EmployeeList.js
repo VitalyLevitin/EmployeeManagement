@@ -1,7 +1,8 @@
 import {useState, useEffect} from 'react'
 import EmployeeService from '../services/EmployeeService'
+import {Link} from 'react-router-dom'
 
-export default function EmployeeComponent() {
+export default function EmployeeList() {
     
     const [employees, setEmployees] = useState([])
 
@@ -10,18 +11,17 @@ export default function EmployeeComponent() {
     }, [])
     
     const getEmployess = () => {
-        EmployeeService.getEmployess()
+        EmployeeService.getAllEmployess()
             .then(response => {
                 setEmployees(response.data)
-                console.log(response.data)
-            })
+            }).catch(e => console.log(e));
     };
 
     return (
        <div className='container'>
             <h1 className='text-center'> Employees</h1>
-
-            <table className='table table-striped'>
+            <Link to = "/add-employee" className = "btn btn-primary mb-2">Add Employee</Link>
+            <table className='table table-bordered table-striped'>
                 <thead>
                     <tr>
                         <th>Employee ID</th>
