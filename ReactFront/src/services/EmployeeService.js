@@ -8,8 +8,16 @@ class EmployeeService {
         return axios.get(EMPLOYEES_REST_API_URL);
     }
 
-    createEmployee(employee){
+    createEmployee(employee) {
         return axios.post(EMPLOYEES_REST_API_URL, employee)
+    }
+
+    getEmployeeById(employeeId) {
+        return axios.get(EMPLOYEES_REST_API_URL + '/' + employeeId)
+    }
+
+    deleteEmployee(employeeId) {
+        return axios.delete(EMPLOYEES_REST_API_URL + '/' + employeeId)
     }
 
 }

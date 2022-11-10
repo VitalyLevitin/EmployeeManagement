@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import EmployeeService from '../services/EmployeeService'
 
 const AddEmployee = () => {
@@ -8,14 +8,27 @@ const AddEmployee = () => {
     const [lastName, setLastName] = useState('')
     const [email, setEmail] = useState('')
     const navigate = useNavigate()
+    const {id} = useParams();
 
     const saveEmployee = (e) => {
         e.preventDefault();
         const employee = {firstName, lastName, email}
         EmployeeService.createEmployee(employee)
-            .then(response => {navigate('/employees')})
+            .then(response => {
+                navigate('/employees')})
             .catch(e => console.log(e))
     }
+
+    useEffect(() => {
+      EmployeeService.getEmployeeById(id)
+        .then(response => {
+            setFirstName(response.firstName)
+            setLastName(response.setLastName)
+            setEmail(response.setEmail)
+        }).catch(e => console.log(e))
+    
+    }, [])
+    
 
     return (
         <div>
@@ -23,8 +36,8 @@ const AddEmployee = () => {
             <div className = 'container'>
                 <div className = 'row'>
                     <div className = 'card col-md-6 offset-md-3'>
-                        <h2 className = 'text-center'>Add Employee</h2>
-                        <div claasName = 'card-body'>
+                        <h2 className = 'text-center'> Add Employee </h2>
+                        <div claasName = 'card-body' >
                             <form>
                                 <div className = 'form-group mb-2'>
                                     <label className = 'form-label'> First Name: </label>
@@ -64,8 +77,8 @@ const AddEmployee = () => {
                                         >
                                     </input>
                                 </div>
-                                <button className='btn btn-success mb-2' onClick={e => saveEmployee(e)}>Save</button>
-                                <Link to = "/" className='btn btn-info ms-2 mb-2'>Return to list</Link>
+                                <button className='btn btn-success mb-2' onClick= {e => saveEmployee(e)}> Save </button>
+                                <Link to = "/" className='btn btn-danger ms-2 mb-2'> Cancel </Link>
                             </form>
                         </div>
                     </div>
