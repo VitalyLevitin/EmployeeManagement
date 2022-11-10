@@ -1,14 +1,20 @@
-import {useState} from 'react'
+import { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import EmployeeService from '../services/EmployeeService'
 
 const AddEmployee = () => {
 
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [email, setEmail] = useState('')
+    const navigate = useNavigate()
 
     const saveEmployee = (e) => {
         e.preventDefault();
         const employee = {firstName, lastName, email}
+        EmployeeService.createEmployee(employee)
+            .then(response => {navigate('/employees')})
+            .catch(e => console.log(e))
     }
 
     return (
@@ -59,6 +65,7 @@ const AddEmployee = () => {
                                     </input>
                                 </div>
                                 <button className='btn btn-success mb-2' onClick={e => saveEmployee(e)}>Save</button>
+                                <Link to = "/" className='btn btn-info ms-2 mb-2'>Return to list</Link>
                             </form>
                         </div>
                     </div>

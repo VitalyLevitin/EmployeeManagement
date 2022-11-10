@@ -12,7 +12,7 @@ function App() {
         <Header />
         <Routes>
           <Route exact path = "/" element = {<EmployeeList />}> </Route>
-          <Route path = "/employee" element = {<EmployeeList />}> </Route>
+          <Route path = "/employees" element = {<EmployeeList />}> </Route>
           <Route path = "/add-employee" element = {<AddEmployee />}> </Route>
         </Routes>
         <Footer />
