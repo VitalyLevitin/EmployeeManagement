@@ -14,7 +14,7 @@ const AddEmployee = () => {
         e.preventDefault();
         const employee = {firstName, lastName, email}
         EmployeeService.createEmployee(employee)
-            .then(response => {
+            .then(() => {
                 navigate('/employees')})
             .catch(e => console.log(e))
     }
@@ -23,8 +23,8 @@ const AddEmployee = () => {
       EmployeeService.getEmployeeById(id)
         .then(response => {
             setFirstName(response.firstName)
-            setLastName(response.setLastName)
-            setEmail(response.setEmail)
+            setLastName(response.LastName)
+            setEmail(response.Email)
         }).catch(e => console.log(e))
     
     }, [])
