@@ -15,6 +15,7 @@ export default function EmployeeList() {
         EmployeeService.getAllEmployess()
             .then(response => {
                 setEmployees(response.data)
+                console.log(response.data)
             }).catch(e => console.log(e));
     };
 
@@ -44,7 +45,7 @@ export default function EmployeeList() {
                                     <td> {employee.email} </td>
                                     <td>
                                         <Link className = 'btn btn-info me-2' to = {`/edit-employee/${employee.id}`}> Update </Link>
-                                        <button className = 'btn btn-danger' onClick = {() => DeleteEmployee(employee.id)}> Remove </button>
+                                        <button className = 'btn btn-danger' onClick = {() => EmployeeService.deleteEmployee(employee.id)}> Remove </button>
                                     </td>
                                 </tr>
                         )

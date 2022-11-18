@@ -1,8 +1,3 @@
-# Read Me First
-The following was discovered as part of building this project:
-
-* The original package name 'com.frozik.Springboot-Backend' is invalid and this project uses 'com.frozik.SpringbootBackend' instead.
-
 # Getting Started
 
 ### Reference Documentation

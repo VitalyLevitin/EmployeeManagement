@@ -1,6 +1,7 @@
 import axios from "axios";
+import EmployeeList from "../components/EmployeeList";
 
-const EMPLOYEES_REST_API_URL = 'https://localhost:8080/api/employess';
+const EMPLOYEES_REST_API_URL = 'http://localhost:8080/api/v1/employees';
 
 class EmployeeService {
 
@@ -18,6 +19,7 @@ class EmployeeService {
 
     deleteEmployee(employeeId) {
         return axios.delete(EMPLOYEES_REST_API_URL + '/' + employeeId)
+            .then(window.location.reload());
     }
 
 }
