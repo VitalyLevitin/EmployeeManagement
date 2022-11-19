@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react'
+import {useState, useEffect} from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import EmployeeService from '../services/EmployeeService'
 
-const AddEmployee = () => {
+const UpdateEmployee = () => {
 
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
@@ -10,33 +10,34 @@ const AddEmployee = () => {
     const navigate = useNavigate()
     const {id} = useParams();
 
-    const saveEmployee = (e) => {
-        e.preventDefault();
-        const employee = {firstName, lastName, email}
-        EmployeeService.createEmployee(employee)
-            .then(() => {
-                navigate('/employees')})
-            .catch(e => console.log(e))
-    }
 
     useEffect(() => {
-      EmployeeService.getEmployeeById(id)
-        .then(response => {
-            setFirstName(response.data.firstName)
-            setLastName(response.data.lastName)
-            setEmail(response.data.email)
-        }).catch(e => console.log(e))
-    
-    }, [])
-    
+        EmployeeService.getEmployeeById(id)
+          .then(response => {
+              setFirstName(response.data.firstName)
+              setLastName(response.data.lastName)
+              setEmail(response.data.email)
+          }).catch(e => console.log(e))
+      
+      }, [])
 
-    return (
-        <div>
+      const update = (e) => {
+          e.preventDefault();
+
+          const employee = {firstName, lastName, email}
+          EmployeeService.updateEmployee(id, employee)
+            .then(() => { navigate("/")})
+            .catch(error => console.log(error))
+      }
+
+
+  return (
+    <>
             <br></br>
             <div className = 'container'>
                 <div className = 'row'>
                     <div className = 'card col-md-6 offset-md-3'>
-                        <h2 className = 'text-center'> Add Employee </h2>
+                        <h2 className = 'text-center'> Update Employee </h2>
                         <div claasName = 'card-body' >
                             <form>
                                 <div className = 'form-group mb-2'>
@@ -77,15 +78,15 @@ const AddEmployee = () => {
                                         >
                                     </input>
                                 </div>
-                                <button className='btn btn-success mb-2' onClick= {e => saveEmployee(e)}> Save </button>
+                                <button className='btn btn-success mb-2' onClick= {e => update(e)}> Save </button>
                                 <Link to = "/" className='btn btn-danger ms-2 mb-2'> Cancel </Link>
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    )
+        </>
+  )
 }
 
-export default AddEmployee
+export default UpdateEmployee

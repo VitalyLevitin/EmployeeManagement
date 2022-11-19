@@ -44,7 +44,7 @@ export default function EmployeeList() {
                                     <td> {employee.lastName} </td>
                                     <td> {employee.email} </td>
                                     <td>
-                                        <Link className = 'btn btn-info me-2' to = {`/edit-employee/${employee.id}`}> Update </Link>
+                                        <Link className = 'btn btn-info me-2' to = {`/update-employee/${employee.id}`}> Update </Link>
                                         <button className = 'btn btn-danger' onClick =
                                          {() => DeleteEmployee(employee.id, setEmployees, employees)}> Remove </button>
                                     </td>
