@@ -4,7 +4,9 @@ import EmployeeService from "../services/EmployeeService"
 const DeleteEmployee = (employeeId, setEmployees, employees) => {
     console.log(employeeId)
     EmployeeService.deleteEmployee(employeeId)
-        .then((response) => { setEmployees(employees.filter(employee => employee.employeeId !== employeeId))})
+        .then(() => {EmployeeService.getAllEmployess().then(response => {
+            setEmployees(response.data)
+            console.log(response.data)})})
         .catch(e => console.log(e))
 }
 
