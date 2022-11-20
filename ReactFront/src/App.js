@@ -9,16 +9,17 @@ import UpdateEmployee from './components/UpdateEmployee';
 function App() {
   return (
     <Router>
-      <div >
+      <>
         <Header />
         <Routes>
           <Route exact path = "/" element = {<EmployeeList />}> </Route>
           <Route path = "/employees" element = {<EmployeeList />}> </Route>
           <Route path = "/add-employee" element = {<AddEmployee />}> </Route>
           <Route path = "/update-employee/:id" element = {<UpdateEmployee />}> </Route>
+          {/* <Route path = "/view-employee/:id" element = {<ViewEmployee />}> </Route> */}
         </Routes>
         <Footer />
-      </div>
+      </>
     </Router>
   );
 }
