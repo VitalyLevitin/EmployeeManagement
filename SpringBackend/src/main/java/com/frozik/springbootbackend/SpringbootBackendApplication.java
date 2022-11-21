@@ -1,7 +1,6 @@
-package com.frozik.SpringbootBackend;
+package com.frozik.springbootbackend;
 
-import com.frozik.SpringbootBackend.model.Employee;
-import com.frozik.SpringbootBackend.repository.EmployeeRepository;
+import com.frozik.springbootbackend.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

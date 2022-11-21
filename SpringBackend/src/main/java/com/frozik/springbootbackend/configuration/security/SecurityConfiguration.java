@@ -1,4 +1,4 @@
-package com.frozik.SpringbootBackend.configuration.security;
+package com.frozik.springbootbackend.configuration.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

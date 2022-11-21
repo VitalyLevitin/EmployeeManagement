@@ -1,8 +1,8 @@
-package com.frozik.SpringbootBackend.controller;
+package com.frozik.springbootbackend.controller;
 
-import com.frozik.SpringbootBackend.exception.ResourceNotFoundException;
-import com.frozik.SpringbootBackend.model.Employee;
-import com.frozik.SpringbootBackend.repository.EmployeeRepository;
+import com.frozik.springbootbackend.exception.ResourceNotFoundException;
+import com.frozik.springbootbackend.model.Employee;
+import com.frozik.springbootbackend.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

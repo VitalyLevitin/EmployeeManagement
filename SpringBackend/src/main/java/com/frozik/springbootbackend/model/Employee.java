@@ -1,4 +1,4 @@
-package com.frozik.SpringbootBackend.model;
+package com.frozik.springbootbackend.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
