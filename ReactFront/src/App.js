@@ -5,6 +5,7 @@ import Footer from './components/Footer';
 import Header from './components/Header';
 import AddEmployee from './components/AddEmployee';
 import UpdateEmployee from './components/UpdateEmployee';
+import ViewEmployee from './components/ViewEmployee';
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
           <Route path = "/employees" element = {<EmployeeList />}> </Route>
           <Route path = "/add-employee" element = {<AddEmployee />}> </Route>
           <Route path = "/update-employee/:id" element = {<UpdateEmployee />}> </Route>
-          {/* <Route path = "/view-employee/:id" element = {<ViewEmployee />}> </Route> */}
+          <Route path = "/view-employee/:id" element = {<ViewEmployee />}> </Route>
         </Routes>
         <Footer />
       </>

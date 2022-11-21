@@ -8,83 +8,56 @@ const AddEmployee = () => {
     const [lastName, setLastName] = useState('')
     const [email, setEmail] = useState('')
     const navigate = useNavigate()
-    const {id} = useParams();
+    const { id } = useParams();
 
     const saveEmployee = (e) => {
         e.preventDefault();
-        const employee = {firstName, lastName, email}
+        const employee = { firstName, lastName, email }
         EmployeeService.createEmployee(employee)
             .then(() => {
-                navigate('/employees')})
+                navigate('/employees')
+            })
             .catch(e => console.log(e))
     }
 
     useEffect(() => {
-      EmployeeService.getEmployeeById(id)
-        .then(response => {
-            setFirstName(response.data.firstName)
-            setLastName(response.data.lastName)
-            setEmail(response.data.email)
-        }).catch(e => console.log(e))
-    
+        EmployeeService.getEmployeeById(id)
+            .then(response => {
+                setFirstName(response.data.firstName)
+                setLastName(response.data.lastName)
+                setEmail(response.data.email)
+            }).catch(e => console.log(e))
+
     }, [])
-    
+
 
     return (
-        <div>
-            <br></br>
-            <div className = 'container'>
-                <div className = 'row'>
-                    <div className = 'card col-md-6 offset-md-3'>
-                        <h2 className = 'text-center'> Add Employee </h2>
-                        <div claasName = 'card-body' >
+        <>
+            <div className='container p-3'>
+                <div className='row'>
+                    <p className='h4'>Add Employee</p>
+                    <div className="row">
+                        <div className="col-md-4">
                             <form>
-                                <div className = 'form-group mb-2'>
-                                    <label className = 'form-label'> First Name: </label>
-                                    <input
-                                        type = 'text'
-                                        placeholder = 'Enter first name'
-                                        name = 'firstName'
-                                        className = 'form-control'
-                                        value = {firstName}
-                                        onChange = {e => setFirstName(e.target.value)}
-                                        >
-                                    </input>
+                                <div className="my-2">
+                                    <input type='text' className="form-control" placeholder='Name' />
                                 </div>
-
-                                <div className = 'form-group mb-2'>
-                                    <label className = 'form-label'> Last Name: </label>
-                                    <input
-                                        type = 'text'
-                                        placeholder = 'Enter last name'
-                                        name = 'lastName'
-                                        className = 'form-control'
-                                        value = {lastName}
-                                        onChange = {e => setLastName(e.target.value)}
-                                        >
-                                    </input>
+                                <div className="my-2">
+                                    <input type='email' className="form-control" placeholder='Email' />
                                 </div>
-
-                                <div className = 'form-group mb-2'>
-                                    <label className = 'form-label'> Email: </label>
-                                    <input
-                                        type = 'email'
-                                        placeholder = 'Enter email address'
-                                        name = 'email'
-                                        className = 'form-control'
-                                        value = {email}
-                                        onChange = {e => setEmail(e.target.value)}
-                                        >
-                                    </input>
+                                <div className="my-2">
+                                    <input type='text' className="form-control" placeholder='Title' />
                                 </div>
-                                <button className='btn btn-success mb-2' onClick= {e => saveEmployee(e)}> Save </button>
-                                <Link to = "/" className='btn btn-danger ms-2 mb-2'> Cancel </Link>
+                                <div className="my-2">
+                                    <button className='btn btn-success mb-2'> Create </button>
+                                    <Link to="/employees" className='btn btn-danger ms-2 mb-2'> Cancel </Link>
+                                </div>
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </>
     )
 }
 
