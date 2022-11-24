@@ -15,9 +15,9 @@ function App() {
         <Routes>
           <Route exact path = "/" element = {<EmployeeList />}> </Route>
           <Route path = "/employees" element = {<EmployeeList />}> </Route>
-          <Route path = "/add-employee" element = {<AddEmployee />}> </Route>
-          <Route path = "/update-employee/:id" element = {<UpdateEmployee />}> </Route>
-          <Route path = "/view-employee/:id" element = {<ViewEmployee />}> </Route>
+          <Route path = "/employees/add-employee" element = {<AddEmployee />}> </Route>
+          <Route path = "/update-employee/:employeeId" element = {<UpdateEmployee />}> </Route>
+          <Route path = "/view-employee/:employeeId" element = {<ViewEmployee />}> </Route>
         </Routes>
         <Footer />
       </>

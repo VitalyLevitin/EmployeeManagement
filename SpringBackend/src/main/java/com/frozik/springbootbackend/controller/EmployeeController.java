@@ -21,7 +21,7 @@ public class EmployeeController {
         return employeeRepository.findAll();
     }
 
-    @PostMapping
+    @PostMapping("/add-employee")
     public Employee createEmployee(@RequestBody Employee employee) {
         return employeeRepository.save(employee);
     }

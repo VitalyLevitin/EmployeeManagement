@@ -8,11 +8,11 @@ const UpdateEmployee = () => {
     const [lastName, setLastName] = useState('')
     const [email, setEmail] = useState('')
     const navigate = useNavigate()
-    const {id} = useParams();
+    const {employeeId} = useParams();
 
 
     useEffect(() => {
-        EmployeeService.getEmployeeById(id)
+        EmployeeService.getEmployeeById(employeeId)
           .then(response => {
               setFirstName(response.data.firstName)
               setLastName(response.data.lastName)
@@ -25,7 +25,7 @@ const UpdateEmployee = () => {
           e.preventDefault();
 
           const employee = {firstName, lastName, email}
-          EmployeeService.updateEmployee(id, employee)
+          EmployeeService.updateEmployee(employeeId, employee)
             .then(() => { navigate("/")})
             .catch(error => console.log(error))
       }

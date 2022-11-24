@@ -1,6 +1,21 @@
-import { Link } from "react-router-dom"
+import {useState, useEffect} from 'react'
+import {Link, useParams} from "react-router-dom"
+import EmployeeService from '../services/EmployeeService'
 
 const ViewEmployee = () => {
+
+    const [employee, setEmployee] = useState([]);
+    const {employeeId} = useParams();
+
+
+    useEffect(() => {
+        EmployeeService.getEmployeeById(employeeId)
+          .then(response => {
+              setEmployee(response.data)
+          }).catch(e => console.log(e))
+      
+      }, [employeeId])
+
     return (
         <>
             <div className="container p-3">
@@ -19,10 +34,10 @@ const ViewEmployee = () => {
                     <div className="col-md-8">
                         <ul className="list-group">
                             <li className="list-group-item list-group-item-action">
-                                Name: <span className="fw-bold"> Frozik </span>
+                                Name: <span className="fw-bold"> {employee.firstName} {employee.lastName} </span>
                             </li>
                             <li className="list-group-item list-group-item-action">
-                                Email: <span className="fw-bold"> Frozik@test.com </span>
+                                Email: <span className="fw-bold"> {employee.email} </span>
                             </li>
                             <li className="list-group-item list-group-item-action">
                                 Title: <span className="fw-bold"> Manager </span>
