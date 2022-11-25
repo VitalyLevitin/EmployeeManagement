@@ -5,6 +5,9 @@ import DeleteEmployee from "./DeleteEmployee";
 
 export default function EmployeeList() {
   const [employees, setEmployees] = useState([]);
+  const [query, setQuery] = useState({
+    text: ''
+  });
 
   useEffect(() => {
     getEmployess();
@@ -21,24 +24,28 @@ export default function EmployeeList() {
 
   return (
     <>
+    <pre>{query.text}</pre>
       <section className="employee-search">
         <div className="container p-3">
           <p className="h3 ">
             Employee List
-            <Link to="/employees/add-employee" className="btn btn-primary ms-2">
+            <Link to="/employees/add-employee" className="btn btn-primary ms-4">
               <i className="fa fa-plus-circle me-2" />
               Add Employee
             </Link>
           </p>
           <form className="row">
-            <div className="col-md-6">
+            <div className="col-md-4">
               <div className="row">
-                <div className="col">
+                <div className="col-6">
                   <div className="mb-2">
                     <input
                       type="text"
                       className="form-control"
                       placeholder="Employee Name"
+                      name="text"
+                      value={query.text}
+                      onChange={e => setQuery(e.target.value)}
                     />
                   </div>
                 </div>
@@ -76,17 +83,15 @@ export default function EmployeeList() {
                         <div className="col-md-6">
                           <ul className="list-group">
                             <li className="list-group-item list-group-item-action">
-                              Name:{" "}
+                              Name:
                               <span className="fw-bold">
-                                {" "}
-                                {employee.firstName} {employee.lastName}{" "}
+                                {employee.firstName} {employee.lastName}
                               </span>
                             </li>
                             <li className="list-group-item list-group-item-action">
-                              Email:{" "}
+                              Email:
                               <span className="fw-bold">
-                                {" "}
-                                {employee.email}{" "}
+                                {employee.email}
                               </span>
                             </li>
                             <li className="list-group-item list-group-item-action">
@@ -107,9 +112,9 @@ export default function EmployeeList() {
                           >
                             <i className="fa fa-pen"></i>
                           </Link>
-                          <Link className="btn btn-danger my-1">
+                          <button className="btn btn-danger my-1" onClick={() => {DeleteEmployee(employee.id, setEmployees)}}>
                             <i className="fa fa-trash"></i>
-                          </Link>
+                          </button>
                         </div>
                       </div>
                     </div>

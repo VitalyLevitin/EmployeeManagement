@@ -18,7 +18,6 @@ const AddEmployee = () => {
       })
       .catch((e) =>{
            console.log(e)
-           console.log("here")
             navigate("/employees/add-employee")});
   };
 
@@ -28,19 +27,18 @@ const AddEmployee = () => {
 
   return (
     <>
-    <pre>{JSON.stringify(employee)}</pre>
       <div className="container p-3">
         <div className="row">
           <p className="h4">Add Employee</p>
           <div className="row">
             <div className="col-md-4">
-              <form>
+              <form onSubmit={saveEmployee}>
                 <div className="my-2">
                   <input
                     required={true}
                     type="text"
                     className="form-control"
-                    placeholder="Name"
+                    placeholder="First Name"
                     name='firstName'
                     value={employee.firstName}
                     onChange={updateInput}
@@ -51,7 +49,7 @@ const AddEmployee = () => {
                     required={true}
                     type="text"
                     className="form-control"
-                    placeholder="Title"
+                    placeholder="Last Name"
                     name='lastName'
                     value={employee.lastName}
                     onChange={updateInput}
@@ -69,7 +67,7 @@ const AddEmployee = () => {
                   />
                 </div>
                 <div className="my-2">
-                  <button className="btn btn-success mb-2" onClick={e => saveEmployee(e)}> Create </button>
+                  <button className="btn btn-success mb-2"> Create </button>
                   <Link to="/employees" className="btn btn-danger ms-2 mb-2">
                     {" "}
                     Cancel{" "}
