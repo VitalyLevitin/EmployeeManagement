@@ -10,8 +10,13 @@ export default function EmployeeList() {
   });
 
   useEffect(() => {
-    getEmployess();
-  }, []);
+    if(query.text.length === 0){
+      getEmployess();
+    }
+    else{
+      findEmployeeByName(query.text);
+    }
+  }, [query.text]);
 
   const getEmployess = () => {
     EmployeeService.getAllEmployess()
@@ -21,6 +26,15 @@ export default function EmployeeList() {
       })
       .catch((e) => console.log(e));
   };
+
+  const findEmployeeByName = () => {
+    EmployeeService.getEmployeeByFirstName(query.text)
+      .then((response) =>{
+        setEmployees(response.data);
+        console.log(response.data)
+      })
+      .catch((e) => console.log(e))
+  }
 
   return (
     <>
@@ -34,27 +48,18 @@ export default function EmployeeList() {
               Add Employee
             </Link>
           </p>
-          <form className="row">
+          <form className="row" onSubmit={findEmployeeByName}>
             <div className="col-md-4">
               <div className="row">
-                <div className="col-6">
+                <div className="col-10">
                   <div className="mb-2">
                     <input
                       type="text"
                       className="form-control"
-                      placeholder="Employee Name"
-                      name="text"
+                      placeholder="Search for an employee"
+                      name="q"
                       value={query.text}
-                      onChange={e => setQuery(e.target.value)}
-                    />
-                  </div>
-                </div>
-                <div className="col">
-                  <div>
-                    <input
-                      type="submit"
-                      className="btn btn-outline-dark"
-                      value="Search Names"
+                      onChange={e => setQuery({...query, text: e.target.value})}
                     />
                   </div>
                 </div>

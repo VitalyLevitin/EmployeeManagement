@@ -15,6 +15,10 @@ class EmployeeService {
     getEmployeeById(employeeId) {
         return axios.get(`${base_url}/employees/${employeeId}`)
     }
+    
+    getEmployeeByFirstName(firstName) {
+        return axios.get(`${base_url}/employees/view-employee/${firstName}`)
+    }
 
     deleteEmployee(employeeId) {
         return axios.delete(`${base_url}/employees/${employeeId}`)

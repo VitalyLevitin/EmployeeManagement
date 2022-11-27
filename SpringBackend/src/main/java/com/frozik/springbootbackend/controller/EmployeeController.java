@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -31,6 +32,15 @@ public class EmployeeController {
         Employee employee = employeeRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("No employee with id:" + id));
         return ResponseEntity.ok(employee);
+    }
+
+    @GetMapping("/view-employee/{query}")
+    public List<Employee> getEmployeeByFirstName(@PathVariable String query) {
+        return employeeRepository.findByFirstNameContaining(query);
+//        System.out.println(query);
+//        List<Employee> employees = new ArrayList<>();
+//        employees.addAll(employeeRepository.findAll());
+//        return employees.stream().filter(name -> name.getFirstName().equals(query)).toList();
     }
 
     @DeleteMapping("/{id}")
