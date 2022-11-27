@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import EmployeeService from "../services/EmployeeService";
 import { Link } from "react-router-dom";
 import DeleteEmployee from "./DeleteEmployee";
+import findEmployeeByName from "./SearchEmployee";
 
 export default function EmployeeList() {
   const [employees, setEmployees] = useState([]);
@@ -14,8 +15,9 @@ export default function EmployeeList() {
       getEmployess();
     }
     else{
-      findEmployeeByName(query.text);
+      findEmployeeByName(query.text, setEmployees);
     }
+    
   }, [query.text]);
 
   const getEmployess = () => {
@@ -27,14 +29,7 @@ export default function EmployeeList() {
       .catch((e) => console.log(e));
   };
 
-  const findEmployeeByName = () => {
-    EmployeeService.getEmployeeByFirstName(query.text)
-      .then((response) =>{
-        setEmployees(response.data);
-        console.log(response.data)
-      })
-      .catch((e) => console.log(e))
-  }
+
 
   return (
     <>
@@ -48,7 +43,7 @@ export default function EmployeeList() {
               Add Employee
             </Link>
           </p>
-          <form className="row" onSubmit={findEmployeeByName}>
+          <form className="row">
             <div className="col-md-4">
               <div className="row">
                 <div className="col-10">
