@@ -33,7 +33,6 @@ export default function EmployeeList() {
 
   return (
     <>
-    <pre>{query.text}</pre>
       <section className="employee-search">
         <div className="container p-3">
           <p className="h3 ">
@@ -43,7 +42,7 @@ export default function EmployeeList() {
               Add Employee
             </Link>
           </p>
-          <form className="row">
+          <form className="row" autoComplete="off" onSubmit={e => e.preventDefault()}>
             <div className="col-md-4">
               <div className="row">
                 <div className="col-10">

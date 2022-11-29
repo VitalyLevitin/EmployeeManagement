@@ -34,13 +34,9 @@ public class EmployeeController {
         return ResponseEntity.ok(employee);
     }
 
-    @GetMapping("/view-employee/{query}")
+    @GetMapping("/search-employee/{query}")
     public List<Employee> getEmployeeByFirstName(@PathVariable String query) {
-        return employeeRepository.findByFirstNameContaining(query);
-//        System.out.println(query);
-//        List<Employee> employees = new ArrayList<>();
-//        employees.addAll(employeeRepository.findAll());
-//        return employees.stream().filter(name -> name.getFirstName().equals(query)).toList();
+        return employeeRepository.findByFirstNameOrLastNameOrEmailContaining(query);
     }
 
     @DeleteMapping("/{id}")
