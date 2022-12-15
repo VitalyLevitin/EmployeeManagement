@@ -1,14 +1,14 @@
 # EmployeeManagement
 
 CRUD management system for employees.  
-Uses JavaScript (React) as the front, MySQL for data retrival and Java (Spring Boot) as the backend.
+Uses JavaScript (React) as the front, MySQL for data retrieval and Java (Spring Boot) as the backend.
 
 ### Getting Started
 To run the web app locally:  
 1. Clone the Project.  
 2. Open a terminal window inside the React folder.
 3. Make sure you have NodeJS installed in your system.
-4. Type the command npm install. (This will install all the dependenice the project uses)  
+4. Type the command npm install. (This will install all the dependencies the project uses)  
 5. Type the command npm start.
 
 You can now open [http://localhost:3000](http://localhost:3000) to view the frontend of the application.
