@@ -1,5 +1,7 @@
 package com.frozik.springbootbackend;
 
+import com.frozik.springbootbackend.domain.Employee;
+import com.frozik.springbootbackend.domain.Title;
 import com.frozik.springbootbackend.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -21,6 +23,7 @@ public class SpringbootBackendApplication implements CommandLineRunner {
 //		employee.setFirstName("Frozik2");
 //		employee.setLastName("Test2");
 //		employee.setEmail("tes2t@test.com");
+//		employee.setTitle(new Title(1, "Software Engineer"));
 //		employeeRepository.save(employee);
 	}
 }

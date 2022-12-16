@@ -6,6 +6,7 @@ import findEmployeeByName from "./SearchEmployee";
 
 export default function EmployeeList() {
   const [employees, setEmployees] = useState([]);
+  const [title, setTitle] = useState([])
   const [query, setQuery] = useState({
     text: ''
   });
@@ -18,13 +19,16 @@ export default function EmployeeList() {
       findEmployeeByName(query.text, setEmployees);
     }
     
-  }, [query.text]);
+  }, [query.text], title);
 
   const getEmployess = () => {
     EmployeeService.getAllEmployess()
       .then((response) => {
         setEmployees(response.data);
-        console.log(response.data);
+        EmployeeService.getTitleByEmployee(response.data)
+        .then((titleResponse) => {
+          setTitle(titleResponse.data)
+        })
       })
       .catch((e) => console.log(e));
   };
@@ -94,7 +98,7 @@ export default function EmployeeList() {
                               </span>
                             </li>
                             <li className="list-group-item list-group-item-action">
-                              Title: <span className="fw-bold"> Manager </span>
+                              Title: <span className="fw-bold"> {title.titleName} </span>
                             </li>
                           </ul>
                         </div>

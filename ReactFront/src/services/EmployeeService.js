@@ -8,12 +8,21 @@ class EmployeeService {
         return axios.get(`${base_url}/employees`);
     }
 
-    createEmployee(employee) {
-        return axios.post(`${base_url}/employees/add-employee`, employee)
+    getAllTitles() {
+        return axios.get(`${base_url}/employees/titles`)
+    }
+
+    createEmployee(employee, titleId) {
+        return axios.post(`${base_url}/employees/add-employee`, employee, titleId)
     }
 
     getEmployeeById(employeeId) {
         return axios.get(`${base_url}/employees/${employeeId}`)
+    }
+
+    getTitleByEmployee(employee) {
+        const titleId = employee.titleId;
+        return axios.get(`${base_url}/employees/titles/${titleId}`)
     }
     
     getEmployeeByFirstName(firstName) {

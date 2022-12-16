@@ -1,4 +1,4 @@
-package com.frozik.springbootbackend.model;
+package com.frozik.springbootbackend.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -22,4 +23,7 @@ public class Employee {
     @Column(name = "last_name")
     private String lastName;
     private String email;
+    @OneToOne
+    @JoinColumn(name="title_id")
+    private List<Title> title;
 }

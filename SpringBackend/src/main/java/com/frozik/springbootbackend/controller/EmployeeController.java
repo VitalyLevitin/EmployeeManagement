@@ -1,14 +1,15 @@
 package com.frozik.springbootbackend.controller;
 
+import com.frozik.springbootbackend.domain.Title;
 import com.frozik.springbootbackend.exception.ResourceNotFoundException;
-import com.frozik.springbootbackend.model.Employee;
+import com.frozik.springbootbackend.domain.Employee;
 import com.frozik.springbootbackend.repository.EmployeeRepository;
+import com.frozik.springbootbackend.repository.TitleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -17,9 +18,17 @@ public class EmployeeController {
     @Autowired
     private EmployeeRepository employeeRepository;
 
+    @Autowired
+    private TitleRepository titleRepository;
+
     @GetMapping
     public List<Employee> getAllEmployees() {
         return employeeRepository.findAll();
+    }
+
+    @GetMapping("/titles")
+    public List<Title> getAllTitles() {
+        return titleRepository.findAll();
     }
 
     @PostMapping("/add-employee")
@@ -34,8 +43,15 @@ public class EmployeeController {
         return ResponseEntity.ok(employee);
     }
 
+    @GetMapping("/titles/{id}")
+    public ResponseEntity<Title> getTitleById(@PathVariable long id) {
+        Title title = titleRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("No titles with id:" + id));
+        return ResponseEntity.ok(title);
+    }
+
     @GetMapping("/search-employee/{query}")
-    public List<Employee> getEmployeeByFirstName(@PathVariable String query) {
+    public List<Employee> getEmployeeByQuery(@PathVariable String query) {
         return employeeRepository.findByFirstNameOrLastNameOrEmailContaining(query);
     }
 
@@ -55,6 +71,7 @@ public class EmployeeController {
         employee.setFirstName(employeeDetails.getFirstName());
         employee.setLastName(employeeDetails.getLastName());
         employee.setEmail(employeeDetails.getEmail());
+//        employee.setTitle(employeeDetails.getTitle());
 
         employeeRepository.save(employee);
         return ResponseEntity.ok(employee);

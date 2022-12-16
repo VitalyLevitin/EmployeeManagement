@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import EmployeeService from "../services/EmployeeService";
 
@@ -6,13 +6,25 @@ const AddEmployee = () => {
   const [employee, setEmployee] = useState({
       firstName: '',
       lastName: '',
-      email: ''
-  });
+      email: '',
+      title: '',
+  })
+
+  const [titles, setTitles] = useState([])
   const navigate = useNavigate();
+
+  useEffect(() => {
+    EmployeeService.getAllTitles()
+      .then(response => {
+        console.log(response.data)
+        setTitles(response.data)
+        });
+  }, [])
+  
 
   const saveEmployee = (e) => {
     e.preventDefault();
-    EmployeeService.createEmployee(employee)
+    EmployeeService.createEmployee(employee, employee.title)
       .then(() => {
         navigate("/employees");
       })
@@ -27,6 +39,7 @@ const AddEmployee = () => {
 
   return (
     <>
+    <pre>{JSON.stringify(employee)}</pre>
       <div className="container p-3">
         <div className="row">
           <p className="h4">Add Employee</p>
@@ -65,6 +78,24 @@ const AddEmployee = () => {
                     value={employee.email}
                     onChange={updateInput}
                   />
+                </div>
+                <div className="my-2">
+                  <select
+                    required={true}
+                    className="form-control"
+                    name='title'
+                    value={employee.title}
+                    onChange={updateInput}>
+                      <option value="">Select a title</option>
+                      {
+                        titles.map(title => {
+                          return(
+                            <option key={title.id} value={title.id}> {title.titleName} </option>
+                          )
+                        })
+                      }
+                    </select>
+                  
                 </div>
                 <div className="my-2">
                   <button className="btn btn-success mb-2"> Create </button>
