@@ -1,17 +1,18 @@
 package com.frozik.springbootbackend.controller;
 
 import com.frozik.springbootbackend.exception.ResourceNotFoundException;
-import com.frozik.springbootbackend.model.Employee;
+import com.frozik.springbootbackend.domain.Employee;
 import com.frozik.springbootbackend.repository.EmployeeRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@Slf4j
 @RequestMapping("/api/v1/employees")
 public class EmployeeController {
     @Autowired
@@ -19,7 +20,9 @@ public class EmployeeController {
 
     @GetMapping
     public List<Employee> getAllEmployees() {
-        return employeeRepository.findAll();
+        log.info("getAllEmployees was invoked");
+        List<Employee> employees = employeeRepository.findAll();
+        return employees;
     }
 
     @PostMapping("/add-employee")
@@ -35,7 +38,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/search-employee/{query}")
-    public List<Employee> getEmployeeByFirstName(@PathVariable String query) {
+    public List<Employee> getEmployeeByQuery(@PathVariable String query) {
         return employeeRepository.findByFirstNameOrLastNameOrEmailContaining(query);
     }
 
