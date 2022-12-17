@@ -3,8 +3,10 @@ package com.frozik.springbootbackend.controller;
 import com.frozik.springbootbackend.exception.ResourceNotFoundException;
 import com.frozik.springbootbackend.domain.Employee;
 import com.frozik.springbootbackend.repository.EmployeeRepository;
+import com.frozik.springbootbackend.service.EmployeeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +19,9 @@ import java.util.List;
 public class EmployeeController {
     @Autowired
     private EmployeeRepository employeeRepository;
+
+    @Autowired
+    private EmployeeService employeeService;
 
     @GetMapping
     public List<Employee> getAllEmployees() {
@@ -52,15 +57,19 @@ public class EmployeeController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Employee> updateEmployee(@PathVariable long id,@RequestBody Employee employeeDetails) {
-        Employee employee = employeeRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException(String.format("No employee with id %d found", id)));
-
-        employee.setFirstName(employeeDetails.getFirstName());
-        employee.setLastName(employeeDetails.getLastName());
-        employee.setEmail(employeeDetails.getEmail());
-
-        employeeRepository.save(employee);
-        return ResponseEntity.ok(employee);
-
+        log.info("updateEmployee was invoked");
+        Employee updatedEmployee = null;
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        if(employeeDetails != null){
+            updatedEmployee = employeeService.updateEmployee(id, employeeDetails);
+            try {
+                employeeService.createEmployee(updatedEmployee);
+                status = HttpStatus.ACCEPTED;
+            } catch (Exception e) {
+                log.error("Error creating employee: {}", e.getMessage());
+            }
+        }
+        log.info("updateEmployee completed.");
+        return ResponseEntity.status(status).body(updatedEmployee);
     }
 }

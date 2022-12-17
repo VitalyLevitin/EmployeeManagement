@@ -1,6 +1,7 @@
 package com.frozik.springbootbackend.service.impl;
 
 import com.frozik.springbootbackend.domain.Employee;
+import com.frozik.springbootbackend.exception.ResourceNotFoundException;
 import com.frozik.springbootbackend.repository.EmployeeRepository;
 import com.frozik.springbootbackend.service.EmployeeService;
 import lombok.AllArgsConstructor;
@@ -25,10 +26,17 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Autowired
     private final EmployeeRepository employeeRepository;
 
-    private final String[] icons = {
+    private final List<String> icons = List.of(
             "https://www.shareicon.net/data/256x256/2016/01/06/234422_bender_256x256.png",
-            "https://www.shareicon.net/data/256x256/2016/01/06/234428_fry_256x256.png"
-    };
+            "https://www.shareicon.net/data/256x256/2016/01/06/234428_fry_256x256.png",
+            "https://www.shareicon.net/data/256x256/2016/01/06/234420_nibbler_256x256.png",
+            "https://www.shareicon.net/data/256x256/2016/01/06/234424_farnsworth_256x256.png",
+            "https://www.shareicon.net/data/256x256/2016/01/06/234419_zoidberg_256x256.png",
+            "https://www.shareicon.net/data/256x256/2016/01/06/234426_hermes_256x256.png",
+            "https://www.shareicon.net/data/256x256/2016/01/06/234425_amy_256x256.png",
+            "https://www.shareicon.net/data/256x256/2016/01/06/234423_scruffy_256x256.png",
+            "https://www.shareicon.net/data/256x256/2016/01/06/234431_leela_256x256.png"
+    );
 
     @Override
     public List<Employee> getAllEmployees() {
@@ -72,17 +80,39 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     private String randomImage() {
-        int randomNum = ThreadLocalRandom.current().nextInt(0, icons.length);
-        return icons[randomNum];
+        int randomNum = ThreadLocalRandom.current().nextInt(0, icons.size()-1);
+        return icons.get(randomNum);
     }
 
     @Override
     public Employee updateEmployee(Long id, Employee employee) {
-        return null;
+        Optional<Employee> optionalEmployee = employeeRepository.findById(id);
+        if(optionalEmployee.isEmpty()){
+            log.error("No employee with id: {}", id);
+            return null;
+        }
+        Employee currentEmployee = optionalEmployee.get();
+        if(employee.getFirstName() != null)
+            currentEmployee.setFirstName(employee.getFirstName());
+        if(employee.getLastName() != null)
+            currentEmployee.setLastName(employee.getLastName());
+        if(employee.getEmail() != null)
+            currentEmployee.setEmail(employee.getEmail());
+        return currentEmployee;
     }
 
     @Override
     public boolean deleteEmployee(Long id) {
-        return false;
+        if(id < 0 || id >= Long.MAX_VALUE)
+            return false;
+        employeeRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("No employee with id:" + id));
+        try {
+            employeeRepository.deleteById(id);
+        } catch (Exception e) {
+            log.error("Error during employee deletion: {}", e.getMessage());
+            throw new InvalidDataAccessResourceUsageException(e.getMessage());
+        }
+        return true;
     }
 }
