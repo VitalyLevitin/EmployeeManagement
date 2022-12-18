@@ -20,10 +20,9 @@ Run the java application, will start a tomcat server on port 8080. [http://local
 
 
 ### Todo
-1. Implement DAO pattern.
+1. Implement DTO pattern.
 2. Pagination.
 3. Login system. (Admin and User)
-4. Randomly generated profile picture.
 
 
 ### Application Preview
