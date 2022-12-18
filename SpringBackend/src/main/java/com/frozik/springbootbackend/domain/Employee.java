@@ -25,5 +25,6 @@ public class Employee implements Serializable {
     private String lastName;
     @Column(nullable = false, unique = true)
     private String email;
+    @Column(name = "image_url")
     private String imageURL;
 }

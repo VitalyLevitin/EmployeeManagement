@@ -6,11 +6,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
     @Query("Select e FROM Employee e where (e.firstName like CONCAT('%',:query,'%') or e.lastName like CONCAT('%',:query,'%') or e.email like CONCAT('%',:query,'%'))")
-    List<Employee> findByFirstNameOrLastNameOrEmailContaining(@Param("query")String query);
+    Optional<List<Employee>> findByFirstNameOrLastNameOrEmailContaining(@Param("query")String query);
 
-    boolean findByEmail(String email);
+    Optional<Employee> findByEmail(String email);
 }

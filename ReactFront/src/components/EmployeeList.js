@@ -74,8 +74,8 @@ export default function EmployeeList() {
                       <div className="row align-items-center d-flex justify-content-around">
                         <div className="col-md-4">
                           <img
-                            src="https://findicons.com/files/icons/1316/futurama_vol_1/256/bender.png"
-                            alt="Bender"
+                            src={employee.imageURL}
+                            alt="Futurama"
                             className="employee-img"
                           />
                         </div>

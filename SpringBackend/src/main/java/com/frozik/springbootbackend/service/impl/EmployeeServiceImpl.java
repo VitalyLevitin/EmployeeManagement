@@ -53,7 +53,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public List<Employee> getEmployeesByParam(String query) {
-        return employeeRepository.findByFirstNameOrLastNameOrEmailContaining(query);
+        return employeeRepository.findByFirstNameOrLastNameOrEmailContaining(query)
+                .orElse(null);
     }
 
     @Override
@@ -64,14 +65,20 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employee.orElse(null);
     }
 
+    public Employee getEmployeeByEmail(String email){
+        return employeeRepository.findByEmail(email)
+                .orElse(null);
+    }
+
     @Override
     public Employee createEmployee(Employee employee) {
         String email = employee.getEmail();
-        if( email != null && email.length() > 2 && this.employeeRepository.findByEmail(email))
+        if( email != null && email.length() > 2 && this.getEmployeeByEmail(email) != null)
             throw new DataIntegrityViolationException("Email already exists");
         Employee newEmployee = null;
         try {
-            employee.setImageURL(randomImage());
+            if(employee.getImageURL()==null)
+                employee.setImageURL(randomImage());
             newEmployee = employeeRepository.save(employee);
         } catch (Exception e) {
             log.error("Error trying to create Employee {}", e.getMessage());
