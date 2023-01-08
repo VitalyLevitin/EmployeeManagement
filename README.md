@@ -20,18 +20,21 @@ Run the java application, will start a tomcat server on port 8080. [http://local
 
 
 ### Todo
-1. Implement DAO pattern.
+1. Implement DTO pattern.
 2. Pagination.
 3. Login system. (Admin and User)
-4. Randomly generated profile picture.
 
 
 ### Application Preview
 
-Employee List:
+Employee List:  
+![image](https://user-images.githubusercontent.com/36646281/208321922-c0875e39-4d03-4efe-8f44-c31c6b397bc5.png)
 
-Create Employee:
+Create Employee:  
+![image](https://user-images.githubusercontent.com/36646281/208321837-26e42f67-9a2d-4e6b-9892-b5e84c5c40ab.png)
 
-View Employee:
+View Employee:  
+![image](https://user-images.githubusercontent.com/36646281/208321938-ef408d97-3781-43a8-8800-8ea07b40bda3.png)
 
-Update/Edit Employee:
+Update/Edit Employee:  
+![image](https://user-images.githubusercontent.com/36646281/208321946-28e73328-cd29-4d7a-aa50-cca6ea454ef0.png)
