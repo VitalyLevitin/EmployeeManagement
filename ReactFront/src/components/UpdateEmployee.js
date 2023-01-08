@@ -8,6 +8,7 @@ const UpdateEmployee = () => {
     lastName: "",
     email: "",
   });
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
   const { employeeId } = useParams();
 
@@ -23,11 +24,14 @@ const UpdateEmployee = () => {
     e.preventDefault();
     EmployeeService.updateEmployee(employeeId, employee)
       .then(() => {
+        setError(null)
         navigate("/employees");
       })
       .catch((e) =>{
-           console.log(e)
-            navigate(`/update-employee/${employeeId}`)});
+          console.log(e.response)
+          setError("* Email already taken")
+          });
+
   };
 
   const updateInput = (e) => {
@@ -73,7 +77,10 @@ const UpdateEmployee = () => {
                     name="email"
                     value={employee.email}
                     onChange={updateInput}
+                    style={error ? {border: '1px solid red'}: {border: 'black'}}
                   />
+                  {error != null && error.length > 0 &&
+                    <h6 style={{color: 'red'}}> {error} </h6> }
                 </div>
                 <div className="my-4">
                   <button className="btn btn-warning mb-2"> Update </button>
@@ -86,8 +93,8 @@ const UpdateEmployee = () => {
             </div>
             <div className="col-md-6">
               <img
-                src="https://findicons.com/files/icons/1316/futurama_vol_1/256/bender.png"
-                alt="Bender"
+                src={employee.imageURL}
+                alt="Futurama"
                 className="employee-img"
               />
             </div>

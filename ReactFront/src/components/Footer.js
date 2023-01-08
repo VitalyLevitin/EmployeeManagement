@@ -5,7 +5,7 @@ const Footer = () => {
     <div>
         <footer className='footer'>
             <p>
-                 &copy; Frozik created this.
+                 &copy; Created by Frozik.
             </p>
         </footer>
     </div>

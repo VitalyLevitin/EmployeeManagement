@@ -103,8 +103,12 @@ public class EmployeeServiceImpl implements EmployeeService {
             currentEmployee.setFirstName(employee.getFirstName());
         if(employee.getLastName() != null)
             currentEmployee.setLastName(employee.getLastName());
-        if(employee.getEmail() != null)
-            currentEmployee.setEmail(employee.getEmail());
+        String email = employee.getEmail();
+        if(email != null && email.length() > 2 &&
+                this.getEmployeeByEmail(email) != null &&
+                !this.getEmployeeById(id).getEmail().equals(email))
+            throw new DataIntegrityViolationException("Email already exists");
+        currentEmployee.setEmail(employee.getEmail());
         return currentEmployee;
     }
 

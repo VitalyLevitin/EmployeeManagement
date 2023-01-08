@@ -8,6 +8,7 @@ const AddEmployee = () => {
       lastName: '',
       email: ''
   });
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   const saveEmployee = (e) => {
@@ -17,8 +18,9 @@ const AddEmployee = () => {
         navigate("/employees");
       })
       .catch((e) =>{
-           console.log(e)
-            navigate("/employees/add-employee")});
+        console.log(e.response)
+        setError("* Email already taken")
+        });
   };
 
   const updateInput = (e => {
@@ -61,10 +63,13 @@ const AddEmployee = () => {
                     type="email"
                     className="form-control"
                     placeholder="Email"
-                    name='email'
+                    name="email"
                     value={employee.email}
                     onChange={updateInput}
+                    style={error ? {border: '1px solid red'}: {border: 'black'}}
                   />
+                  {error != null && error.length > 0 &&
+                    <h6 style={{color: 'red'}}> {error} </h6> }
                 </div>
                 <div className="my-2">
                   <button className="btn btn-success mb-2"> Create </button>

@@ -87,8 +87,12 @@ public class EmployeeController {
         Employee updatedEmployee = null;
         HttpStatus status = HttpStatus.BAD_REQUEST;
         if(employeeDetails != null){
-            updatedEmployee = employeeService.updateEmployee(id, employeeDetails);
-            status = HttpStatus.ACCEPTED;
+            try {
+                updatedEmployee = employeeService.updateEmployee(id, employeeDetails);
+                status = HttpStatus.ACCEPTED;
+            } catch (Exception e) {
+                log.error("Error updating employee {}", e.getMessage());
+            }
         }
         log.info("updateEmployee completed.");
         return ResponseEntity.status(status).body(updatedEmployee);

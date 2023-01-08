@@ -29,7 +29,7 @@ const ViewEmployee = () => {
             <div className="container mt-3">
                 <div className="row align-items-center">
                     <div className="col-md-4 ">
-                        <img src="https://findicons.com/files/icons/1316/futurama_vol_1/256/bender.png" alt="Bender" className="employee-img" />
+                        <img src={employee.imageURL} alt="Futurama" className="employee-img" />
                     </div>
                     <div className="col-md-8">
                         <ul className="list-group">

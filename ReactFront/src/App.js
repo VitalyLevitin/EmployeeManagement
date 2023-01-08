@@ -10,7 +10,7 @@ import ViewEmployee from './components/ViewEmployee';
 function App() {
   return (
     <Router>
-      <>
+      <div className="main-wrapper">
         <Header />
         <Routes>
           <Route exact path = "/" element = {<EmployeeList />}> </Route>
@@ -20,7 +20,7 @@ function App() {
           <Route path = "/view-employee/:employeeId" element = {<ViewEmployee />}> </Route>
         </Routes>
         <Footer />
-      </>
+      </div>
     </Router>
   );
 }
