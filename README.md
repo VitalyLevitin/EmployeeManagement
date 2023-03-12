@@ -1,7 +1,7 @@
 # EmployeeManagement
 
 CRUD management system for employees.  
-Uses JavaScript (React) as the front, MySQL for data retrieval and Java (Spring Boot) as the backend.
+Used JavaScript (React) as the front, MySQL for data retrieval and Java (Spring Boot) as the backend.
 
 ### Getting Started
 To run the web app locally:  
